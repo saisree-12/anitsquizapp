@@ -1,0 +1,66 @@
+{
+  "name": "quiz",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.3.6",
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.2.3",
+    "browser-router": "^0.2.0",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "font-awesome": "^4.7.0",
+    "gridfs-stream": "^1.1.1",
+    "jquery": "^3.6.4",
+    "js-cookie": "^3.0.5",
+    "mdb-react-ui-kit": "^6.0.0",
+    "mdbreact": "^5.2.0",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.4",
+    "multer-gridfs-storage": "^5.0.2",
+    "nodemailer": "^6.9.2",
+    "react": "^18.2.0",
+    "react-awesome-reveal": "^4.2.3",
+    "react-bootstrap": "^2.7.2",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-parallax": "^3.5.1",
+    "react-pdf": "^6.2.2",
+    "react-player": "^2.12.0",
+    "react-scripts": "5.0.1",
+    "swiper": "^9.3.2",
+    "uuid": "^9.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "CI=false && react-scripts build --no-warnings",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.11.2"
+  }
+}
