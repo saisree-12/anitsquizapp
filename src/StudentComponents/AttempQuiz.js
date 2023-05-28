@@ -33,7 +33,7 @@ const AttempQuiz = () => {
         if(location.state === null)
             navigation('/slogin',{state:{uname:uname}})
         const quizid = location.state.quizid;
-        axios.post('http://localhost:8888/attemptquiz',{quizid:quizid,uname:uname})
+        axios.post('https://anitsquiz.onrender.com/attemptquiz',{quizid:quizid,uname:uname})
         .then(response => {
             setRes(response.data.data[0])
             setSTime(response.data.stime)
@@ -52,7 +52,7 @@ const AttempQuiz = () => {
 
 
     const getAnswers =() => {
-        axios.post('http://localhost:8888/getans',{quizid:location.state.quizid,uname:uname})
+        axios.post('https://anitsquiz.onrender.com/getans',{quizid:location.state.quizid,uname:uname})
         .then(res => {
             setAns(res.data.questions)
         })

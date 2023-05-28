@@ -59,7 +59,7 @@ const SelectQues = () => {
             setNoqs(result.length)
         } 
 
-        axios.post('http://localhost:8888/select-ques',{subName:subName}).then((res) => {
+        axios.post('https://anitsquiz.onrender.com/select-ques',{subName:subName}).then((res) => {
             setTimeout(() => {
                 setLoading(false)
             },3000)
@@ -111,7 +111,7 @@ const SelectQues = () => {
     } 
     const Host = () => {
             if(selected.length>0){
-                axios.post('http://localhost:8888/select-prev-ques',{
+                axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                     quizId:quizId,
                     quizName:quizName,
                     subName:subName,
@@ -126,7 +126,7 @@ const SelectQues = () => {
                     subId:subId}).then((res) => {
                     console.log(res)
             }) 
-            axios.post('http://localhost:8888/add-select-prev-ques',{quizId:quizId,selected:selected}).then((res) => {
+            axios.post('https://anitsquiz.onrender.com/add-select-prev-ques',{quizId:quizId,selected:selected}).then((res) => {
             }) 
             navigate('/faculty/fdash')
         }   

@@ -23,7 +23,7 @@ const StudentDetails = () => {
     const d_uname = JSON.parse(ubytes.toString(CryptoJS.enc.Utf8));
 
     React.useEffect(() => {
-      axios.post('http://localhost:8888/student-details',{classId:classId,subId:subId}).then((res) => {
+      axios.post('https://anitsquiz.onrender.com/student-details',{classId:classId,subId:subId}).then((res) => {
         console.log(subId);
         setRes(res.data);
         setTimeout(() => {
@@ -77,7 +77,7 @@ const StudentDetails = () => {
 
       const handlePrint = () => {
         console.log("Called");
-        axios.post('http://localhost:8888/download-pdf',{data:data,cName:className,subName:subName},{responseType:'arraybuffer'})
+        axios.post('https://anitsquiz.onrender.com/download-pdf',{data:data,cName:className,subName:subName},{responseType:'arraybuffer'})
         .then((response) => {
           const url = window.URL.createObjectURL(new Blob([response.data],{ type: 'application/pdf' }));
           const link = document.createElement('a');
@@ -101,7 +101,7 @@ const StudentDetails = () => {
       const handleEmail =async (e) => {
         e.preventDefault()
         var fileData;
-        await axios.post('http://localhost:8888/download-pdf', { data: data, cName: className, subName: subName }, { responseType: 'arraybuffer' })
+        await axios.post('https://anitsquiz.onrender.com/download-pdf', { data: data, cName: className, subName: subName }, { responseType: 'arraybuffer' })
           .then((response) => {
             fileData = new Blob([response.data], { type: 'application/pdf' })
           })
@@ -112,7 +112,7 @@ const StudentDetails = () => {
           formData.append('classId', classId);
           formData.append('cname',className)
           formData.append('file', fileData, 'studentmarksdetails.pdf');
-        await axios.post('http://localhost:8888/send-email',formData,config)
+        await axios.post('https://anitsquiz.onrender.com/send-email',formData,config)
           .then((response) => {
             console.log('PDF sent via email successfully');
           })

@@ -17,7 +17,7 @@ const ViewQuiz = () => {
     console.log(quizId);
 
     React.useEffect(() => {
-        axios.post('http://localhost:8888/view-quiz',{quizIds:quizId}).then((res) => {
+        axios.post('https://anitsquiz.onrender.com/view-quiz',{quizIds:quizId}).then((res) => {
             setResQuiz(res.data.quesDetails)
         })
     },[])  

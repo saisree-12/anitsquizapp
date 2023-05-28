@@ -46,7 +46,7 @@ const Addqs = () => {
     const uname = JSON.parse(ubytes.toString(CryptoJS.enc.Utf8));
     var selected;
     React.useEffect(() => {
-        axios.post('http://localhost:8888/add-ques',{}).then((res) => {
+        axios.post('https://anitsquiz.onrender.com/add-ques',{}).then((res) => {
             setTimeout(() => {
                 setLoading(false)
             },3000)
@@ -77,7 +77,7 @@ const Addqs = () => {
         setquesId(quesId+1)
         setResult([...result,`Q${quesId+1}`])
         setNoqs(noqss+1)
-            axios.post('http://localhost:8888/add-ques1',{
+            axios.post('https://anitsquiz.onrender.com/add-ques1',{
                 quesId:`Q${quesId+1}`, 
                 topicName:topicName,
                 subName:subName,
@@ -102,7 +102,7 @@ const Addqs = () => {
             setquesId(quesId+1) 
             setResult([...result,`Q${quesId+1}`])
     
-            axios.post('http://localhost:8888/select-prev-ques',{
+            axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                 quizId:quizId, 
                 quizName:quizName,
                 subName:subName,
@@ -117,7 +117,7 @@ const Addqs = () => {
                 subId:subId}).then((res) => {
                     // console.log(res)
                 }) 
-            axios.post('http://localhost:8888/add-ques1',{
+            axios.post('https://anitsquiz.onrender.com/add-ques1',{
                 quesId:`Q${quesId+1}`, 
                 topicName:topicName,
                 subName:subName,
@@ -129,7 +129,7 @@ const Addqs = () => {
                 answer:answer
             })  
             console.log(result);
-                axios.post('http://localhost:8888/add-select-prev-ques',{quizId:quizId,selected:[...result,`Q${quesId+1}`]}).then((res) => {
+                axios.post('https://anitsquiz.onrender.com/add-select-prev-ques',{quizId:quizId,selected:[...result,`Q${quesId+1}`]}).then((res) => {
                 })  
             navigate('/faculty/fdash');
         } 
@@ -141,7 +141,7 @@ const Addqs = () => {
         e.preventDefault();
         setquesId(quesId+1)
         setResult([...result,`Q${quesId+1}`])
-        axios.post('http://localhost:8888/add-ques1',{
+        axios.post('https://anitsquiz.onrender.com/add-ques1',{
             quesId:`Q${quesId+1}`, 
             topicName:topicName,
             subName:subName,

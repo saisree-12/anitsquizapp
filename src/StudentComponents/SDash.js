@@ -26,7 +26,7 @@ const SDash = () => {
     const ubytes = CryptoJS.AES.decrypt(Cookies.get('sprocess_id'),key)
     const uname = JSON.parse(ubytes.toString(CryptoJS.enc.Utf8));
       setFlag(true)
-      axios.post('http://localhost:8888/sdash',{uname:uname})
+      axios.post('https://anitsquiz.onrender.com/sdash',{uname:uname})
       .then((res) => {
         setRes(res.data.quizes)
         setNotes(res.data.notes)
@@ -47,7 +47,7 @@ const SDash = () => {
     navigate('/student/assignment',{state:{quizid:quizes[index].quizid}})
   }
   const Rendered = (index) => {
-    axios.post('http://localhost:8888/pdf',{id:notes[index].notesId}).then(response => {
+    axios.post('https://anitsquiz.onrender.com/pdf',{id:notes[index].notesId}).then(response => {
       console.log(response.data);
       window.open(response.data.url,'_blank');
   })

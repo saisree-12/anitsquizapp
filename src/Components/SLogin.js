@@ -14,7 +14,7 @@ const SLogin = () => {
     const Submit = (e) => {
     const key = "anudeepgude765";
         e.preventDefault();
-        axios.post('http://localhost:8888/slogin',{uname:uname,pwd:pwd})
+        axios.post('https://anitsquiz.onrender.com/slogin',{uname:uname,pwd:pwd})
         .then((res) => {
             if(res.data.validation){
                 const encrypteduname = CryptoJS.AES.encrypt(JSON.stringify(uname),key).toString()

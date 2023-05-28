@@ -26,7 +26,7 @@ const Fdashboard = () => {
     var state;
 
     React.useEffect(() => {
-        axios.post('http://localhost:8888/fdash',{uname:d_uname}).then((res) => { 
+        axios.post('https://anitsquiz.onrender.com/fdash',{uname:d_uname}).then((res) => { 
             setTimeout(() => {
                 setLoading(false)
             },1000)
@@ -38,7 +38,7 @@ const Fdashboard = () => {
         //eslint-disable-next-line
     },[]) 
     const Rendered = (index) => {
-    axios.post('http://localhost:8888/pdf',{id:fNotes[index].notesId}).then(response => {
+    axios.post('https://anitsquiz.onrender.com/pdf',{id:fNotes[index].notesId}).then(response => {
         console.log(response.data);
         window.open(response.data.url,'_blank');
     })

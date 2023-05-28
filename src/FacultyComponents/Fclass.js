@@ -102,7 +102,7 @@ const Fclass = () => {
     } 
     const Update = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8888/update-quiz',{quizId:quizId,quizDate:quizDate,quizTime:quizTime,duration:duration}).then((res) => {
+        axios.post('https://anitsquiz.onrender.com/update-quiz',{quizId:quizId,quizDate:quizDate,quizTime:quizTime,duration:duration}).then((res) => {
         })
             navigate('/faculty/fdash')
     }  

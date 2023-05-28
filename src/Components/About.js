@@ -14,7 +14,7 @@ const About = () => {
     const feedBack = (e) => {
         e.preventDefault();
         if(mail.length > 0 && msg.length > 0){
-            axios.post('http://localhost:8888/feedback',{mail:mail,msg:msg})
+            axios.post('https://anitsquiz.onrender.com/feedback',{mail:mail,msg:msg})
             .then(res => {
                 window.location.reload();
             })

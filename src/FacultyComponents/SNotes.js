@@ -39,7 +39,7 @@ const SNotes = () => {
         formData.append('msg',msg)
         formData.append("file",file);
         formData.append("fileName",fileName);
-        axios.post('http://localhost:8888/uploaded',formData,config)
+        axios.post('https://anitsquiz.onrender.com/uploaded',formData,config)
         setTimeout(() => {
           navigate(-1);
         },500)

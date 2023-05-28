@@ -16,7 +16,7 @@ const FLogin = () => {
     
     const Submit = (e) => { 
         e.preventDefault();
-        axios.post('http://localhost:8888/flogin',{uname:uname,pwd:pwd})
+        axios.post('https://anitsquiz.onrender.com/flogin',{uname:uname,pwd:pwd})
         .then((res) => {
             if(res.data.valid){
                 const encrypteduname = CryptoJS.AES.encrypt(JSON.stringify(uname),key).toString()
