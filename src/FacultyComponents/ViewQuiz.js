@@ -27,7 +27,7 @@ return (
         <div>
             <NavbarComp /> 
         </div>
-        <div className='d-flex flex-wrap justify-content-center align-items-center border m-5'><h1>{quizName}</h1></div>
+        <div className='d-flex flex-wrap justify-content-center align-items-center border' style={{marginTop:'150px'}}><h1>{quizName}</h1></div>
         <div className='w-100 d-flex flex-column py-5 align-items-center' style={{gap:"20px 0px"}}>
         <Fade cascade duration={1500} damping={.1}> 
                         {resQuiz.map((item) => {

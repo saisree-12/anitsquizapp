@@ -131,7 +131,7 @@ const StudentDetails = () => {
         {isLoading?<Loading />:
         <div className='assign-bg1' style={{minHeight:"100vh"}}>
           <NavbarComp />
-        <div className='sd-table w-100 mt-5' style={{fontFamily:"QuickSand"}}>
+        <div className='sd-table w-100 mt-5' style={{fontFamily:"QuickSand",marginTop:'200px'}}>
           <Fade cascade duration={2000}>
             <div style={{width:"1400px"}}>
             <MDBDataTable
