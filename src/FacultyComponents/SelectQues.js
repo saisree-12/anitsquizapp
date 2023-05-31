@@ -144,13 +144,13 @@ return (
     <div className='d-flex flex-column' style={{minHeight:'100vh',background:"linear-gradient(to right,#cfd9df,#e2ebf0)"}}>
         <NavbarComp /> 
         {isLoading?<Loading />: 
-        <div> 
+        <div style={{marginTop:'100px'}}> 
             {flag?<></>:
-            <>
+            <> 
                 <Alert className='container mt-5' variant="warning" onClose={() => setFlag(true)} dismissible >  
                 <p className='h5'><b>Please select atleast 5 Questions to host your quiz</b></p>  
                 </Alert>
-            </>}  
+            </>}   
             <div className='d-flex flex-column align-items-center justify-content-start mt-5' id='whole' style={{fontFamily:"QuickSand",gap:"15px"}}>
                 <div className='text-center'>
                     <p className='h3'><b>Select the questions from the given question Bank</b></p>
