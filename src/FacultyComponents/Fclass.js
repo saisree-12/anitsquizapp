@@ -113,7 +113,7 @@ return (
             <NavbarComp/>
         </div> 
         {isLoading?<Loading />:
-        <div className='mb-2 ' id='whole'>
+        <div className='mb-2' id='whole' style={{marginTop:'100px'}}>
             <div className='pb-2 p-5 m-5'>
             <p className='h1 text-center text-dark' style={{fontFamily:"Expletus Sans"}}>{className}, {subName}</p>
             </div>
