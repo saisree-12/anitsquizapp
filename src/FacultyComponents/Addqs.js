@@ -166,7 +166,7 @@ return (
                     <Alert className='container mt-2' variant="warning" onClose={() => setFlag(true)} dismissible >  
                     <p className='h6'><b>Please add atleast 5 question</b></p>   
                     </Alert> 
-                </>}
+               </>}
                     <p className='h3 text-center text-white mb-5' style={{fontFamily:"QuickSand"}}>Question Form</p>
                     <p className='h3 text-start text-white mb-5' style={{fontFamily:"QuickSand"}}>Question No. {noqss+1}</p>
                     <form> 
@@ -177,9 +177,9 @@ return (
                         <MDBInput className='my-5' contrast  type='text' id='option4' value={option4} label="Option 4" onChange={(e) => setOption4(e.target.value)}></MDBInput>
                         <MDBInput className='my-5' contrast  type='text' id='answer' value={answer} label="Answer" onChange={(e) => setAnswer(e.target.value)}></MDBInput>
                         <div className='my-5 d-flex flex-wrap justify-content-between'>
-                            <button className='btn btn-primary' onClick={Add}>Add Question</button>
-                            <button className='btn btn-primary' onClick={AddPrev}>Add from prev questions</button>
-                            <button className='btn btn-primary' onClick={Host}>Host</button>
+                            <button className='btn btn-primary animicard' onClick={Add}>Add Question</button>
+                            <button className='btn btn-primary animicard' onClick={AddPrev}>Add from prev questions</button>
+                            <button className='btn btn-primary animicard' onClick={Host}>Host & Mail</button>
                         </div>
                     </form>
                 </div>

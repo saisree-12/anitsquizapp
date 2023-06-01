@@ -126,9 +126,9 @@ app.post('/search',(req,res) => {
     })
 })
 
-app.post('/select-prev-ques',(req,res) => {
+app.post('/select-prev-ques',async (req,res) => {
     console.log(req.body);
-    db_hqzs.insertMany({
+    await db_hqzs.insertMany({
         quizid:req.body.quizId,
         QuizName:req.body.quizName,
         SubjectName:req.body.subName,
@@ -145,6 +145,34 @@ app.post('/select-prev-ques',(req,res) => {
     .then((res1) => {
         console.log(res1)
     }) 
+    await db_classes.find({ class_id: classId }).then((response) => {
+        mailId = response[0].mail;
+    });
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'anitsquiz01@gmail.com',
+          pass: 'xdrsndeyvghifkjw',
+        },
+      });
+      
+      const mailOptions = {
+        from: 'anitsquiz01@gmail.com',
+        to: mailId,
+        subject: `Reminder for ${QuizName} on ${quizdate} at ${quiztime}`,
+        text: `Dear Students,
+
+        This is a reminder that the ${QuizName} is scheduled on ${quizdate}, at ${quiztime} The quiz will last for ${duration} minutes.
+        
+        Please be prepared to participate on time and make the most of this opportunity. Good luck!
+        
+        Best regards,`
+      };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return error.message
+            }
+        });  
 })
 
 app.post('/add-select-prev-ques',(req,res) => {

@@ -122,10 +122,10 @@ const SelectQues = () => {
                     quizDate:quizDate,
                     duration:parseInt(duration),
                     quizTime:quizTime,
-                    uname:uname,
+                    uname:uname, 
                     subId:subId}).then((res) => {
                     console.log(res)
-            }) 
+            })  
             axios.post('https://anitsquiz.onrender.com/add-select-prev-ques',{quizId:quizId,selected:selected}).then((res) => {
             }) 
             navigate('/faculty/fdash')
@@ -177,8 +177,8 @@ return (
                         ); 
                     })} 
                 <div className='d-flex justify-content-center'>
-                    <button className='btn btn-primary  m-5' onClick={Add}>Add New qs</button>
-                    <button className='btn btn-primary m-5' onClick={Host}>Host</button>
+                    <button className='btn btn-primary  m-5 animicard' onClick={Add}>Add New qs</button>
+                    <button className='btn btn-primary m-5 animicard' onClick={Host}>Host & Mail</button>
                 </div> 
             </div>
         </div>
