@@ -110,7 +110,7 @@ const SelectQues = () => {
         setQs(l)
     } 
     const Host = () => {
-            if(selected.length>0){
+            if(selected.length>4){
                 axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                     quizId:quizId,
                     quizName:quizName,
