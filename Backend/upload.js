@@ -110,7 +110,7 @@ app.post('/pdf',async (req,res) => {
            res.send({url:url})
         })
     })
-  
+    
     app.post('/download-pdf', (req, res) => {
       const tabularData = req.body.data;
       const className = req.body.cName;
@@ -143,6 +143,12 @@ app.post('/pdf',async (req,res) => {
       let y = 175;
     
       tabularData.rows.forEach((row) => {
+        // Check if adding the row will exceed the page height
+        if (y + 25 > doc.page.height - 50) {
+          doc.addPage(); // Add a new page
+          y = 50; // Reset the y-coordinate
+        }
+    
         doc.lineWidth(1).rect(50, y, 500, 25).stroke();
     
         doc.text(row.regno.toString(), 50, y + 5, { width: 100, align: 'center' });
