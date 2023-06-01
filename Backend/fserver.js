@@ -4,7 +4,7 @@ const db = require('./connection')
 const cors = require('cors')
 const db_flog = require('./Databases/facultyLogin')
 const db_fclass = require('./Databases/facultyClasses')
-const db_class = require('./Databases/Classes')
+const db_classes = require('./Databases/Classes')
 const db_sd = require('./Databases/StudentDetail')
 const db_smd = require('./Databases/StudentMaksDetails')
 const db_qs = require('./Databases/Questions')
@@ -50,7 +50,7 @@ app.post('/fdash',async (req,res) => {
             classId.push(item.class_id)
         }) 
     }) 
-    await db_class.find({class_id:{$in: classId}}).then((res2) => {
+    await db_classes.find({class_id:{$in: classId}}).then((res2) => {
         res2.map((item) => {
             className.push(item.class_name) 
         })  
@@ -151,12 +151,12 @@ app.post('/select-prev-ques',async (req,res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'anitsquiz01@gmail.com',
-          pass: 'xdrsndeyvghifkjw',
+        user: 'anitsquiz01@gmail.com',
+        pass: 'xdrsndeyvghifkjw',
         },
-      });
-      
-      const mailOptions = {
+    });
+    
+    const mailOptions = {
         from: 'anitsquiz01@gmail.com',
         to: mailId,
         subject: `Reminder for ${QuizName} on ${quizdate} at ${quiztime}`,
