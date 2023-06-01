@@ -134,7 +134,7 @@ const Addqs = () => {
         } 
         else{
             setFlag(false);
-        6}
+        }
     } 
     const AddPrev = (e) => {
         e.preventDefault();
