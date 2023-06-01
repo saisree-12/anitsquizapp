@@ -145,7 +145,7 @@ app.post('/select-prev-ques',async (req,res) => {
     .then((res1) => {
         console.log(res1)
     }) 
-    await db_classes.find({ class_id: class_id }).then((response) => {
+    await db_classes.find({ class_id: req.body.classId }).then((response) => {
         mailId = response[0].mail;
     });
     const transporter = nodemailer.createTransport({
@@ -159,10 +159,10 @@ app.post('/select-prev-ques',async (req,res) => {
     const mailOptions = {
         from: 'anitsquiz01@gmail.com',
         to: mailId,
-        subject: `Reminder for ${QuizName} on ${quizdate} at ${quiztime}`,
+        subject: `Reminder for ${req.body.quizName} on ${req.body.quizDate} at ${req.body.quizTime}`,
         text: `Dear Students,
 
-        This is a reminder that the ${QuizName} is scheduled on ${quizdate}, at ${quiztime} The quiz will last for ${duration} minutes.
+        This is a reminder that the ${req.body.quizName} is scheduled on ${req.body.quizDate}, at ${req.body.quizTime} The quiz will last for ${req.body.duration} minutes.
         
         Please be prepared to participate on time and make the most of this opportunity. Good luck!
         
