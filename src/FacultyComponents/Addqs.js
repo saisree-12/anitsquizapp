@@ -100,7 +100,7 @@ const Addqs = () => {
         e.preventDefault();
         setquesId(quesId+1) 
         setResult([...result,`Q${quesId+1}`])
-        if(result.length >= 5){
+        if(result.length >= 4){
             axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                 quizId:quizId, 
                 quizName:quizName,
