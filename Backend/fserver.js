@@ -145,7 +145,7 @@ app.post('/select-prev-ques',async (req,res) => {
     .then((res1) => {
         console.log(res1)
     }) 
-    await db_classes.find({ class_id: classId }).then((response) => {
+    await db_classes.find({ class_id: class_id }).then((response) => {
         mailId = response[0].mail;
     });
     const transporter = nodemailer.createTransport({

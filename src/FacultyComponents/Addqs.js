@@ -98,10 +98,9 @@ const Addqs = () => {
     }   
     const Host = (e) => {
         e.preventDefault();
+        setquesId(quesId+1) 
+        setResult([...result,`Q${quesId+1}`])
         if(result.length >= 5){
-            setquesId(quesId+1) 
-            setResult([...result,`Q${quesId+1}`])
-    
             axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                 quizId:quizId, 
                 quizName:quizName,
@@ -166,11 +165,12 @@ return (
                     <Alert className='container mt-2' variant="warning" onClose={() => setFlag(true)} dismissible >  
                     <p className='h6'><b>Please add atleast 5 question</b></p>   
                     </Alert> 
-               </>}
+                </>}
                     <p className='h3 text-center text-white mb-5' style={{fontFamily:"QuickSand"}}>Question Form</p>
                     <p className='h3 text-start text-white mb-5' style={{fontFamily:"QuickSand"}}>Question No. {noqss+1}</p>
                     <form> 
                         <MDBTextArea className='my-5' contrast type='text' rows={3} id='ques' value={ques} label="Question" onChange={(e) => setQues(e.target.value)}></MDBTextArea>
+
                         <MDBInput className='my-5' contrast type='text' id='option1' value={option1} label="Option 1" onChange={(e) => setOption1(e.target.value)}></MDBInput>
                         <MDBInput className='my-5' contrast  type='text' id='option2' value={option2} label="Option 2" onChange={(e) => setOption2(e.target.value)}></MDBInput>
                         <MDBInput className='my-5'  contrast  type='text' id='option3' value={option3} label="Option 3" onChange={(e) => setOption3(e.target.value)}></MDBInput>
