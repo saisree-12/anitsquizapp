@@ -128,7 +128,6 @@ app.post('/quizquestions',async (req,res) => {
     })
     // const retrievedQuestion = retrievedDoc.question.replace(/\n/g, "<br>")
     await questions.find({ quesid: { $in: quesids } }, { _id: 0, question: 1, option1: 1, option2: 1, option3: 1, option4: 1, answer: 1 })
-    .toArray()
     .then((response) => {
       // Convert line breaks in the questions to <br> tags and include options and answer
       const formattedQuestions = response.map((question) => {
@@ -141,10 +140,9 @@ app.post('/quizquestions',async (req,res) => {
           answer: question.answer
         };
       });
-  
+
       res.send({ questions: formattedQuestions });
     })
-  
 })
 
 
