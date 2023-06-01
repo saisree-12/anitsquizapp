@@ -98,12 +98,12 @@ const Addqs = () => {
     }   
     const Host = (e) => {
         e.preventDefault();
-        setquesId(quesId+1) 
-        setResult([...result,`Q${quesId+1}`])
         if(result.length >= 4){
+            setquesId(quesId+1) 
+            setResult([...result,`Q${quesId+1}`])
             axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
                 quizId:quizId, 
-                quizName:quizName,
+                quizName:quizName, 
                 subName:subName,
                 topicName:topicName,
                 noqs:result.length,
@@ -134,7 +134,7 @@ const Addqs = () => {
         } 
         else{
             setFlag(false);
-    }
+        6}
     } 
     const AddPrev = (e) => {
         e.preventDefault();
