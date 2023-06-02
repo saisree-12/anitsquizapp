@@ -27,7 +27,7 @@ return (
         <div>
             <NavbarComp /> 
         </div>
-        <div className='d-flex flex-wrap justify-content-center align-items-center border' style={{marginTop:'150px'}}><h1>{quizName}</h1></div>
+        <div className='d-flex flex-wrap justify-content-center align-items-center border' style={{marginTop:"150px"}}><h1>{quizName}</h1></div>
         <div className='w-100 d-flex flex-column py-5 align-items-center' style={{gap:"20px 0px"}}>
         <Fade cascade duration={1500} damping={.1}> 
                         {resQuiz.map((item) => {
@@ -35,7 +35,7 @@ return (
                                 <Card id='sqs' className='hovered hovered-1'  key={item.quesid}>  
                                     <Card.Body className='text-start'>  
                                         <Card.Title><b>{item.topicName}</b></Card.Title>
-                                        <Card.Title id='selectqs-card-text' style={{fontSize:"22px"}}>{item.question}</Card.Title>
+                                        <Card.Title style={{fontSize:"22px"}} id='selectqs-card-text' className='h4 prevent-select' dangerouslySetInnerHTML={{ __html: item.question }}></Card.Title>
                                     </Card.Body> 
                                 </Card> 
                             ); 

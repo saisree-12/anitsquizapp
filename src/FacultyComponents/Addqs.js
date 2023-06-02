@@ -1,5 +1,5 @@
 import React from 'react'
-import { MDBInput,MDBTextArea } from 'mdb-react-ui-kit'
+import { MDBTextArea } from 'mdb-react-ui-kit'
 import AddImg from '../Assets/addqs.jpg' 
 import { useLocation,useNavigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap';
@@ -101,35 +101,32 @@ const Addqs = () => {
         if(result.length >= 4){
             setquesId(quesId+1) 
             setResult([...result,`Q${quesId+1}`])
-            axios.post('https://anitsquiz.onrender.com/select-prev-ques',{
+            axios.post('https://anitsquiz.onrender.com/select-prev-ques-from-add',{
                 quizId:quizId, 
                 quizName:quizName, 
                 subName:subName,
                 topicName:topicName,
-                noqs:result.length,
-                marks:result.length*mpq,
+                noqs:result.length+1,
+                marks:(result.length+1)*mpq,
                 classId:classId,
                 quizDate:quizDate,
                 duration:duration,
                 quizTime:quizTime,
                 uname:uname,
-                subId:subId}).then((res) => {
-                    // console.log(res)
-                }) 
-            axios.post('https://anitsquiz.onrender.com/add-ques1',{
-                quesId:`Q${quesId+1}`, 
-                topicName:topicName,
-                subName:subName,
-                question:ques, 
-                option1:option1,
-                option2:option2,
-                option3:option3,
-                option4:option4,
-                answer:answer
-            })  
-            console.log(result);
-                axios.post('https://anitsquiz.onrender.com/add-select-prev-ques',{quizId:quizId,selected:[...result,`Q${quesId+1}`]}).then((res) => {
-                })  
+                subId:subId,
+                question:{
+                    quesId:`Q${quesId+1}`, 
+                    topicName:topicName,
+                    subName:subName,
+                    question:ques, 
+                    option1:option1,
+                    option2:option2,
+                    option3:option3,
+                    option4:option4,
+                    answer:answer
+                },
+                hostedques:{quizId:quizId,selected:[...result,`Q${quesId+1}`]}
+            })
             navigate('/faculty/fdash');
         } 
         else{
@@ -166,16 +163,15 @@ return (
                     <p className='h6'><b>Please add atleast 5 question</b></p>   
                     </Alert> 
                 </>}
-                    <p className='h3 text-center text-white mb-5' style={{fontFamily:"QuickSand"}}>Question Form</p>
-                    <p className='h3 text-start text-white mb-5' style={{fontFamily:"QuickSand"}}>Question No. {noqss+1}</p>
+                    {/* <p className='h3 text-center text-white mb-5' style={{fontFamily:"QuickSand"}}>Question Form</p> */}
+                    <p className='h3 text-start text-white mb-1' style={{fontFamily:"QuickSand"}}>Question No. {noqss+1}</p>
                     <form> 
-                        <MDBTextArea className='my-5' contrast type='text' rows={3} id='ques' value={ques} label="Question" onChange={(e) => setQues(e.target.value)}></MDBTextArea>
-
-                        <MDBInput className='my-5' contrast type='text' id='option1' value={option1} label="Option 1" onChange={(e) => setOption1(e.target.value)}></MDBInput>
-                        <MDBInput className='my-5' contrast  type='text' id='option2' value={option2} label="Option 2" onChange={(e) => setOption2(e.target.value)}></MDBInput>
-                        <MDBInput className='my-5'  contrast  type='text' id='option3' value={option3} label="Option 3" onChange={(e) => setOption3(e.target.value)}></MDBInput>
-                        <MDBInput className='my-5' contrast  type='text' id='option4' value={option4} label="Option 4" onChange={(e) => setOption4(e.target.value)}></MDBInput>
-                        <MDBInput className='my-5' contrast  type='text' id='answer' value={answer} label="Answer" onChange={(e) => setAnswer(e.target.value)}></MDBInput>
+                        <MDBTextArea className='my-5' style={{resize:'none'}} contrast type='text' rows={3} id='ques' value={ques} label="Question" onChange={(e) => setQues(e.target.value)}></MDBTextArea>
+                        <MDBTextArea className='my-5' rows={2} contrast type='text' id='option1' value={option1} label="Option 1" onChange={(e) => setOption1(e.target.value)}></MDBTextArea>
+                        <MDBTextArea className='my-5' rows={2} contrast  type='text' id='option2' value={option2} label="Option 2" onChange={(e) => setOption2(e.target.value)}></MDBTextArea>
+                        <MDBTextArea className='my-5' rows={2}  contrast  type='text' id='option3' value={option3} label="Option 3" onChange={(e) => setOption3(e.target.value)}></MDBTextArea>
+                        <MDBTextArea className='my-5' rows={2} contrast  type='text' id='option4' value={option4} label="Option 4" onChange={(e) => setOption4(e.target.value)}></MDBTextArea>
+                        <MDBTextArea className='my-5' rows={2} contrast  type='text' id='answer' value={answer} label="Answer" onChange={(e) => setAnswer(e.target.value)}></MDBTextArea>
                         <div className='my-5 d-flex flex-wrap justify-content-between'>
                             <button className='btn btn-primary animicard' onClick={Add}>Add Question</button>
                             <button className='btn btn-primary animicard' onClick={AddPrev}>Add from prev questions</button>

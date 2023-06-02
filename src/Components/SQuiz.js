@@ -5,6 +5,8 @@ import axios from 'axios'
 import Loader from './Loader'
 import Cookies from 'js-cookie'
 import CryptoJS from 'crypto-js'
+import {RiTimerLine} from 'react-icons/ri'
+
 
 const Timer = ({duration,onTimeOver}) => {
 
@@ -36,8 +38,7 @@ const Timer = ({duration,onTimeOver}) => {
   
 
 
-
-const Quizques = () => {
+const SQuiz = () => {
 
     const [blabel,setBlabel] = React.useState('Next')
     const [marks,setMarks] = React.useState(0)
@@ -51,7 +52,6 @@ const Quizques = () => {
     const quizid = location.state.quizid
     const subId = location.state.subId
     const duration = location.state.duration
-    const quizName = location.state.quizName
     const [qs,setQs] = React.useState()
     const navigate = useNavigate()
 
@@ -60,14 +60,14 @@ const Quizques = () => {
     const uname = JSON.parse(ubytes.toString(CryptoJS.enc.Utf8));
 
     const handleTimeOver = () => {
-        axios.post('https://anitsquiz.onrender.com/updatemarks',{quizid:quizid,uname:uname,marks:marks*mpq,subId:subId})
+        axios.post('https://anitsquiz.onrender.com/updatemarks',{quizid:quizid,uname:uname,marks:(ch === qs[ind].answer)?(marks+1)*mpq:(marks)*mpq,subId:subId})
             .then(res => {
                 document.getElementById('pop').style.visibility = 'visible';
                 document.getElementById('pop').style.backdropFilter = 'blur(5px)';
                 document.getElementById('pop-out').style.visibility = 'visible';
                 setTimeout(() => {
                     navigate('/student/sdash')
-                },3000)
+                },1000)
             })
       };
 
@@ -112,13 +112,14 @@ const Quizques = () => {
             .then(res => {
                 setTimeout(() => {
                     navigate('/student/sdash')
-                },3000)
+                },1000)
             })
         }
         console.log(marks);
         var l = [...selop]
         l = [0,0,0,0]
         setOp(l)
+        setCh('')
     }
 
     const optionClicked =async (e,index) => {
@@ -139,7 +140,7 @@ const Quizques = () => {
         </>:
     <div className='d-flex flex-column flex-wrap ques' style={{height:"100vh",width:"100%",background:"linear-gradient(to right,#cfd9df,#e2ebf0)"}}>
         <div className='d-flex p-4 justify-content-around'>
-            <p className='h2 ps-5 text-dark' style={{fontFamily:'QuickSand'}}>{quizName}</p>
+            <p className='h2 ps-5 text-dark' style={{fontFamily:'QuickSand'}}>{location.state.quizName}</p>
             <p className='h5 text-dark' style={{fontFamily:"QuickSand"}} id='timer'><Timer duration = {duration} onTimeOver = {handleTimeOver}/></p>
         </div> 
         <div className='d-flex flex-column justify-content-start pt-5' style={{gap:60}}>
@@ -148,24 +149,24 @@ const Quizques = () => {
                     <p className='h2 text-decoration-underline'>Question {ind+1}</p>
                 </div>
                 <div className='d-flex my-3 flex-row flex-wrap'>
-                    <label className='h4 prevent-select'>{qs[ind].question}</label>
+                    <label className='h4 prevent-select' dangerouslySetInnerHTML={{ __html: qs[ind].question }}></label>
                 </div>
             </div>
             <div className='container flex-column d-flex  px-1 py-4' style={{gap:50}}>
                 <div className=' d-flex flex-row flex-wrap justify-content-between' style={{gap:"20px"}}>
                     <div className={`option shadow rounded rounded-5 p-3 ${selop[0] === 1?"bg-success  text-white":"bg-light  text-dark"}`} onClick={(e) => optionClicked(e,0)}>
-                        <p key = {"1"} className={`h4 prevent-select`}>{qs[ind].option1}</p>
+                        <label key = {1} className={`h4 prevent-select`} dangerouslySetInnerHTML={{ __html: qs[ind].option1 }}></label>
                     </div>
                     <div className={`option shadow rounded rounded-5 p-3 ${selop[1] === 1?"bg-success  text-white":"bg-light  text-dark"}`} onClick={(e) => optionClicked(e,1)}>
-                        <p key = {2}  className='h4 prevent-select' >{qs[ind].option2}</p>
+                        <label key = {2}  className='h4 prevent-select' dangerouslySetInnerHTML={{ __html: qs[ind].option2 }}></label>
                     </div>
                 </div>
                 <div className='d-flex flex-row flex-wrap justify-content-between' style={{gap:"20px"}}>
                     <div className={`option h4 prevent-select shadow rounded  rounded-5 p-3 ${selop[2] === 1?"bg-success text-white":"bg-light text-dark"}`} onClick={(e) => optionClicked(e,2)}>
-                        <p key={3}  className='h4 prevent-select' >{qs[ind].option3}</p>
+                        <label key={3}  className='h4 prevent-select' dangerouslySetInnerHTML={{ __html: qs[ind].option3 }}></label>
                     </div>
                     <div className={`option shadow rounded rounded-5 p-3 ${selop[3] === 1?"bg-success  text-white":"bg-light  text-dark"}`} onClick={(e) => optionClicked(e,3)}>
-                        <p key = {4} className='h4 prevent-select ' >{qs[ind].option4}</p>
+                        <label key = {4} className='h4 prevent-select ' dangerouslySetInnerHTML={{ __html: qs[ind].option4 }}></label>
                     </div>
                 </div>
             </div>
@@ -176,8 +177,10 @@ const Quizques = () => {
     <div className='fpop-out whole' id='pop-out' style={{backgroundColor:"rgba(0,0,0,.5)"}}>
             <div className='f-pop bg p-5' id='pop' style={{height:"400px"}}>
                         <div className='w-100 h-100 d-flex flex-column justify-content-center  text-center'>
-                            <div className='h1 mb-5 text-light' style={{fontFamily:"QuickSand"}}>You got : {(marks)*mpq}</div>
-                            <div className='h5 text-light' style={{fontFamily:"QuickSand",fontWeight:400}}>We will be redirecting you to your Dashboard in 3 seconds </div>
+                            <div className='h2 mb-5 text-light' style={{fontFamily:"QuickSand"}}><RiTimerLine className='h2'/> Time's up! </div>
+                            <div className='h4 text-light' style={{fontFamily:"QuickSand",fontWeight:400}}>Your quiz has come to an end.</div>
+                            <div className='h4 text-light' style={{fontFamily:"QuickSand",fontWeight:400}}>Stay tuned for the results!</div>
+                            <div className='h5 text-light mt-4' style={{fontFamily:"QuickSand",fontWeight:400}}>We will be redirecting you to your Dashboard in 3 seconds </div>
                         </div>
             </div>
         </div>
@@ -187,4 +190,4 @@ const Quizques = () => {
   )
 }
 
-export default Quizques 
+export default SQuiz

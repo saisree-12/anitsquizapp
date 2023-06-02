@@ -102,22 +102,6 @@ app.post('/sdash',async (req,res) => {
 
 
 
-// app.post('/quizquestions',async (req,res) => {
-//     const quizid = req.body.quizid
-//     var quesids;
-//     await hostedquestions.find({quizid:quizid},{_id:0})
-//     .then((response) => {
-//         console.log(response);
-//         quesids = response[0].quesids
-//     })
-//     // const retrievedQuestion = retrievedDoc.question.replace(/\n/g, "<br>")
-//     await questions.find({quesid:{$in:quesids}},{_id:0,question:1,option1:1,option2:1,option3:1,option4:1,answer:1})
-//     .then((response) => {
-//         res.send({questions:response})
-//     })
-// })
-
-
 app.post('/quizquestions',async (req,res) => {
     const quizid = req.body.quizid
     var quesids;
@@ -126,26 +110,11 @@ app.post('/quizquestions',async (req,res) => {
         console.log(response);
         quesids = response[0].quesids
     })
-    // const retrievedQuestion = retrievedDoc.question.replace(/\n/g, "<br>")
-    await questions.find({ quesid: { $in: quesids } }, { _id: 0, question: 1, option1: 1, option2: 1, option3: 1, option4: 1, answer: 1 })
+    await questions.find({quesid:{$in:quesids}},{_id:0,question:1,option1:1,option2:1,option3:1,option4:1,answer:1})
     .then((response) => {
-      // Convert line breaks in the questions to <br> tags and include options and answer
-      const formattedQuestions = response.map((question) => {
-        return {
-          question: question.question.replace(/\n/g, "<br>"),
-          option1: question.option1,
-          option2: question.option2,
-          option3: question.option3,
-          option4: question.option4,
-          answer: question.answer
-        };
-      });
-
-      res.send({ questions: formattedQuestions });
+        res.send({questions:response})
     })
 })
-
-
 
 app.post('/attemptquiz',async (req,res) => {
     var data;
@@ -202,7 +171,6 @@ app.post('/updatemarks',(req,res) => {
             res.send(response)
         })
 })
-
 
 app.post('/getans',async (req,res) => {
     const quizid = req.body.quizid

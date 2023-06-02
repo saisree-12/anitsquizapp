@@ -42,46 +42,92 @@ const SelectQues = () => {
     const ubytes = CryptoJS.AES.decrypt(Cookies.get('process_id'),key);
     const uname = JSON.parse(ubytes.toString(CryptoJS.enc.Utf8));
 
+    // React.useEffect(() => {
+    //     var selectFlag = Location.state.selectFlag 
+    //     if(selectFlag===1){
+    //         quizName = Location.state.quizName
+    //         topicName = Location.state.topicName
+    //         quizDate = Location.state.quizDate
+    //         quizTime = Location.state.quizTime
+    //         duration = Location.state.duration
+    //         mpq = Location.state.mpq
+    //         subName = Location.state.subName
+    //         quizId = Location.state.quizId
+    //         result = Location.state.Result
+    //         subId = Location.state.subId
+    //         setSelected([...result])
+    //         setNoqs(result.length)
+    //     } 
+    //     axios.post('https://anitsquiz.onrender.com/select-ques',{subName:subName}).then((res) => {
+    //         setTimeout(() => {
+    //             setLoading(false)
+    //         },3000) 
+    //         var fltr = res.data.filter(item => {
+    //             console.log(item.quesid)
+    //             return !selected.includes(item.quesid);
+    //         })    
+    //         console.log("fltr",fltr)
+    //         setQs(fltr)
+    //         const l = []
+            
+    //         qs.map(i => {
+    //             l.push(i.quesid);
+    //         })
+    //         const dic = {}
+
+    //         l.forEach(key => {
+    //             dic[key] = false;
+    //         })
+    //         setColored(dic)
+    //         setQsSearch(res.data) 
+    //     })
+
+    // },[])  
+
     React.useEffect(() => {
-        var selectFlag = Location.state.selectFlag 
-        if(selectFlag===1){
-            quizName = Location.state.quizName
-            topicName = Location.state.topicName
-            quizDate = Location.state.quizDate
-            quizTime = Location.state.quizTime
-            duration = Location.state.duration
-            mpq = Location.state.mpq
-            subName = Location.state.subName
-            quizId = Location.state.quizId
-            result = Location.state.Result
-            subId = Location.state.subId
-            setSelected([...result])
-            setNoqs(result.length)
-        } 
-
-        axios.post('https://anitsquiz.onrender.com/select-ques',{subName:subName}).then((res) => {
-            setTimeout(() => {
-                setLoading(false)
-            },3000)
-            const l = []
-            setQs(res.data)
-            qs.map(i => {
-                l.push(i.quesid);
+        var selectFlag = Location.state.selectFlag;
+        if (selectFlag === 1) {
+          quizName = Location.state.quizName;
+          topicName = Location.state.topicName;
+          quizDate = Location.state.quizDate;
+          quizTime = Location.state.quizTime;
+          duration = Location.state.duration;
+          mpq = Location.state.mpq;
+          subName = Location.state.subName;
+          quizId = Location.state.quizId;
+          result = Location.state.Result;
+          subId = Location.state.subId;
+          setSelected([...result]);
+          setNoqs(result.length);
+        }
+      }, []);
+      
+      React.useEffect(() => {
+        if (subName) {
+          axios.post('https://anitsquiz.onrender.com/select-ques', { subName: subName })
+            .then((res) => {
+              setTimeout(() => {
+                setLoading(false);
+              }, 3000);
+              setQs(res.data);
             })
-            const dic = {}
-
-            l.forEach(key => {
-                dic[key] = false;
-            })
-            setColored(dic)
-
-            setQsSearch(res.data) 
-        })
-
-
-    },[])  
-
-
+            .catch((error) => {
+              console.log(error);
+              setLoading(false);
+            });
+        }
+      }, [subName]);
+      
+      React.useEffect(() => {
+        const l = qs.map((i) => i.quesid);
+        const dic = {};
+        l.forEach((key) => {
+          dic[key] = selected.includes(key);
+        });
+        setColored(dic);
+        setQsSearch(qs);
+      }, [qs, selected]); 
+      
     const Clicked = (e,val) => { 
         if(selected.indexOf(val) === -1){
             setSelected([...selected,val])
@@ -90,7 +136,7 @@ const SelectQues = () => {
             const updatedList = selected.filter((value) => value !== val);
             setSelected([...updatedList]); 
             setNoqs(noqss-1)
-        } 
+        }  
         var l = {...colored}
         l[val] = !l[val]
         setColored(l) 
@@ -130,7 +176,7 @@ const SelectQues = () => {
             }) 
             navigate('/faculty/fdash')
         }   
-        else{
+        else{ 
             setFlag(false);
             window.scroll(0,0);
         }
@@ -170,7 +216,7 @@ return (
                             <Card id='sqs' className={`selectqs-card ${colored[item.quesid]?'bg-success text-white':'bg-white text-dark'} shadow shadow-0`}  key={item.quesid} onClick={(e) => {Clicked(e,item.quesid)}}>  
                                 <Card.Body>  
                                     <Card.Title><b>{item.topic_name}</b></Card.Title>
-                                    <Card.Title id='selectqs-card-text'>{item.question}</Card.Title>
+                                    <Card.Title id='selectqs-card-text' className='h4 prevent-select' dangerouslySetInnerHTML={{ __html: item.question }}></Card.Title>
                                 </Card.Body> 
                             </Card> 
                             </Fade>
@@ -183,17 +229,6 @@ return (
             </div>
         </div>
         } 
-        {/* <div className='fpop-out' id='pop-out'>
-            <div className='f-pop' id='pop'>
-                <button className='btn btn-close'  onClick={() => ClosePop()}></button>
-                <div className='d-flex align-items-start h-100'> 
-                    <div className='w-50 h-100 d-flex flex-column justify-content-around align-items-center'>
-                        <img></img>
-                        <MDBBtn color='success' onClick={success}>Success</MDBBtn>
-                    </div> 
-                </div>   
-            </div> 
-        </div>  */}
     </div>
     )   
 }   
